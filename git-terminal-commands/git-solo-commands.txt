@@ -1,0 +1,69 @@
+===========================================================================
+                    Git Commands Sheet (Windows)
+===========================================================================
+
+                    Brain-dead shortcut foundation
+
+cd <file-name>                      # Change/navigating directory
+cd ..                               # Step back one directory at a time
+dir <file-name>                     # Check files inside directory
+ls                                  # List files/folders
+md <file-name>                      # Create a directory
+mkdir <folder-name>                 # Create folder
+type nul <file-name>                # Creates a file
+code .                              # Open current directory in a new win
+code <file-name>                    # Open a specific file
+code -r .                           # Open current folder in existing
+code -n .                           # Open current folder in new
+cls                                 # Clear terminal
+
+code --list-extensions              # List installed VS Code extensions
+code --diff file1 file2             # Open diff view between two files
+code --add <folder-path>            # Add folder to current VS Code workspace
+code --new-window                   # Force VS Code to open in a fresh window
+
+-----------------------------------------------------------------------------
+                            Solo Projects
+-----------------------------------------------------------------------------
+
+# To log name/email for commit history (Do once)
+
+git config --global user.name "Your Name"
+git config --global user.email "you@email.com"
+git config --global init.defaultBranch main  # Use main instead of master
+
+
+# Common commands
+
+git clone <url>                     # Clone repository
+git branch                          # List branches
+git remote -v                       # Show remote URLs
+git pull                            # Get latest changes from remote
+git status                          # MUST Check before committing
+git add .                           # Stage all changes
+git commit -m "Clear message"       # MUST Commit with good message
+git push                            # Backup to GitHub
+
+# Branching (optional but recommended)
+
+git checkout -b experiment          # Try new ideas safely
+git checkout main                   # Return to main
+git merge experiment                # Merge if successful
+git branch -d experiment            # Clean up branch
+
+# Undoing/Renaming
+
+git restore <file-name>             # Discard unwanted changes
+git reset --soft HEAD~1             # Undo last commit, keep changes
+git commit --amend --no-edit        # Add changes to last commit, keep message
+git commit --amend -m "New message" # Change last commit message
+git rm <file-name>                  # Delete file and stage deletion
+git mv old-name new-name            # Rename/move file
+
+# See history
+
+git show                            # Show last commit details
+git log                             # Review commit history
+git log --oneline                   # Review commit history (compact-view)
+git diff                            # See unstaged changes
+git diff --staged                   # See staged changes

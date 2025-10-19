@@ -1,0 +1,135 @@
+===========================================================================
+                    Git Commands Sheet (Windows)
+===========================================================================
+
+                    Brain-dead shortcut foundation
+
+cd <file-name>                      # Change/navigating directory
+cd ..                               # Step back one directory at a time
+dir <file-name>                     # Check files inside directory
+ls                                  # List files/folders
+md <file-name>                      # Create a directory
+mkdir <folder-name>                 # Create folder
+type nul <file-name>                # Creates a file
+code .                              # Open current directory in a new win
+code <file-name>                    # Open a specific file
+code -r .                           # Open current folder in existing
+code -n .                           # Open current folder in new
+cls                                 # Clear terminal
+
+code --list-extensions              # List installed VS Code extensions
+code --diff file1 file2             # Open diff view between two files
+code --add <folder-path>            # Add folder to current VS Code workspace
+code --new-window                   # Force VS Code to open in a fresh window
+
+----------------------------------------------------------------------------
+                        Team Collaboration Workflow
+----------------------------------------------------------------------------
+
+# Initial Setup (Do once per project)
+
+git config --global user.name "Your Name"
+git config --global user.email "you@work-email.com"
+git config --global init.defaultBranch main
+git config --global pull.rebase false  # Merge strategy (discuss with team)
+
+# Daily team workflow
+
+git fetch                           # MUST Check for updates before starting
+git pull origin main                # Sync with team's latest changes
+git checkout -b feature/issue-123   # MUST Create feature branch (not main)
+git branch                          # Verify you're on your branch
+
+# Work on changes
+
+git status                          # MUST Check before staging
+git add .                           # Stage changes
+git commit -m "feat: add login"     # Clear, linked commit
+git push -u origin feature/issue    # Push branch to remote (first time)
+git push                            # Push subsequent updates
+
+# Keeping branch updated
+
+git checkout main                   # Switch to main
+git pull origin main                # Get latest team changes
+git checkout feature/issue-123      # Back to your branch
+git merge main                      # CRITICAL: Merge main into your branch
+
+# After PR Approval & Merge
+
+git checkout main                   # Switch to main
+git pull origin main                # Get merged changes
+git branch -d feature/issue-123     # Delete local branch
+git push origin --delete feature/   # Delete remote branch (optional)
+
+# Reviewing Team's Work
+
+git fetch                           # Get all remote branches
+git checkout teammate-branch        # Review teammate's code
+git checkout main                   # Return to main
+
+# Handling Merge Conflicts
+
+git status                          # See conflicted files
+# Fix conflicts in VS Code (look for <<<<<<, =====, >>>>>>)
+
+git add .                           # Stage resolved files
+git commit -m "resolved"            # Commit resolution
+git push                            # Push resolved changes
+
+# Stashing (When switching tasks)
+
+git stash                           # Save uncommitted work
+git stash list                      # See all stashes
+git checkout other-branch           # Switch branches
+git checkout your-branch            # Return
+git stash pop                       # Restore saved work
+git stash drop                      # Delete latest stash
+
+# Critical Safety Commands
+
+git log --oneline --graph --all     # See full branch history
+git diff main                       # Compare your branch to main
+git remote -v                       # Verify remote repository
+git fetch --prune                   # Clean up deleted remote branches
+
+# Emergency Fixes
+
+git restore <file>                  # Discard changes to file
+git reset --hard origin/main        # DANGER: Reset to remote main (loses work!)
+git reset --soft HEAD~1             # Undo last commit, keep changes
+git commit --amend --no-edit        # Add to last commit (before push only!)
+
+# PR Best Practices Commands
+
+git log --oneline main..HEAD        # See commits you'll submit in PR
+git diff main...HEAD                # See all changes vs main
+git rebase -i HEAD~3                # Clean up last 3 commits (before push)
+
+===========================================================================
+                        CRITICAL TEAM RULES
+===========================================================================
+
+NEVER:
+- Commit directly to main (always use feature branches)
+- Push --force to shared branches without team permission
+- Commit secrets, API keys, or passwords
+- Work on main branch
+- Merge without pulling latest changes first
+
+ALWAYS:
+- Pull before starting work each day
+- Create descriptive branch names (feature/fix/docs/refactor)
+- Write clear commit messages (what & why/imperative verbs)
+- Keep branches updated with main
+- Review changes before committing (git diff)
+- Communicate with team before force-pushing
+- Link commits to issues/tickets (#123)
+- Test before pushing
+- Request code reviews via Pull Requests
+
+COMMIT MESSAGE FORMAT:
+type: brief description (#ticket)
+
+Types: feat, fix, docs, refactor, test, chore
+Example: "feat: add email validation to signup form (#456)"
