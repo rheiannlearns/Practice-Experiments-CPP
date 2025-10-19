@@ -15,7 +15,7 @@ code .                              # Open current directory in a new win
 code <file-name>                    # Open a specific file
 code -r .                           # Open current folder in existing
 code -n .                           # Open current folder in new
-cls                                 # Clear terminal
+cls or clear                        # Clear terminal
 
 code --list-extensions              # List installed VS Code extensions
 code --diff file1 file2             # Open diff view between two files
